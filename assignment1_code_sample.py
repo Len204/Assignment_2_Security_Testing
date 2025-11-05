@@ -16,7 +16,7 @@ def get_user_input():
     return user_input
 
 def send_email(to, subject, body):
-    """Send an email using the system 'mail' command (no shell)."""
+    """Send an email using the system 'mail'."""
     os.system(f'echo {body} | mail -s "{subject}" {to}')
 
 def get_data():
@@ -35,9 +35,13 @@ def save_to_db(data):
     cursor.close()
     connection.close()
 
-if __name__ == '__main__':
-    """Orchestrate input -> fetch -> save -> email."""
+"""if __name__ = '__main__':"""
+"""input -> fetch -> save -> email."""
+def main() -> None:
     user_input = get_user_input()
     data = get_data()
     save_to_db(data)
     send_email('admin@example.com', 'User Input', user_input)
+
+if __name__ == "__main__":
+    main()
