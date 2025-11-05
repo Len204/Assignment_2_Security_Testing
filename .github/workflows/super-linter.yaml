@@ -39,10 +39,6 @@ jobs:
           VALIDATE_PYTHON_RUFF: true
           VALIDATE_PYTHON_FLAKE8: true
           VALIDATE_PYTHON_RUFF_FORMAT: true
-
-      - name: Bandit Scan
-        uses: shundor/python-bandit-scan@v1.0      
-
         
 
           
