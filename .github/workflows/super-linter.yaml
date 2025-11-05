@@ -37,7 +37,6 @@ jobs:
           VALIDATE_PYTHON_RUFF: true
           VALIDATE_PYTHON_FLAKE8: true
           VALIDATE_PYTHON_PYLINT: true
-          FIX_PYTHON_PYLINT: true
           VALIDATE_PYTHON_RUFF_FORMAT: true
           VALIDATE_PYTHON_ISORT: true
           FIX_PYTHON_ISORT: true
