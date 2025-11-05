@@ -40,6 +40,16 @@ jobs:
           VALIDATE_PYTHON_FLAKE8: true
           VALIDATE_PYTHON_RUFF_FORMAT: true
 
+      - name: Bandit-scan
+        uses: shundor/bandit-action@v1
+        with: 
+          path: "."
+          level: high
+          confidence: high
+          exit_zero: true           
+
+        
+
           
           
 
