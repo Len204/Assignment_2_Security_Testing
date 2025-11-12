@@ -1,5 +1,3 @@
-""" Python Script """
-
 import os
 import pymysql
 from urllib.request import urlopen
@@ -10,23 +8,19 @@ db_config = {
     'password': 'secret123'
 }
 
-def get_user_input() -> str:
-    """Adding string input"""
+def get_user_input():
     user_input = input('Enter your name: ')
     return user_input
 
-def send_email(to: str, subject: str, body: str) -> None:
-    """Adding value of str"""
+def send_email(to, subject, body):
     os.system(f'echo {body} | mail -s "{subject}" {to}')
 
 def get_data():
-    """Fetch text from a URL using a context manager."""
     url = 'http://insecure-api.com/get-data'
     data = urlopen(url).read().decode()
     return data
 
 def save_to_db(data):
-    """Insert a row using parameterized SQL to avoid injection."""
     query = f"INSERT INTO mytable (column1, column2) VALUES ('{data}', 'Another Value')"
     connection = pymysql.connect(**db_config)
     cursor = connection.cursor()
@@ -35,15 +29,11 @@ def save_to_db(data):
     cursor.close()
     connection.close()
 
-"""if __name__ = '__main__':"""
-"""input -> fetch -> save -> email."""
-def main() -> None:
+if __name__ == '__main__':
     user_input = get_user_input()
     data = get_data()
     save_to_db(data)
     send_email('admin@example.com', 'User Input', user_input)
 
-if __name__ == "__main__":
-    main()
 
 
