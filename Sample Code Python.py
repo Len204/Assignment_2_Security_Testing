@@ -1,4 +1,4 @@
-"""Sample script: prompt user, fetch data, save to DB, and send an email."""
+""" Python Script """
 
 import os
 import pymysql
@@ -10,13 +10,13 @@ db_config = {
     'password': 'secret123'
 }
 
-def get_user_input():
-    """Prompt the user for their name and return it."""
+def get_user_input() -> str:
+    """Adding string input"""
     user_input = input('Enter your name: ')
     return user_input
 
-def send_email(to, subject, body):
-    """Send an email using the system 'mail'."""
+def send_email(to: str, subject: str, body: str) -> None:
+    """Adding value of str"""
     os.system(f'echo {body} | mail -s "{subject}" {to}')
 
 def get_data():
@@ -45,3 +45,5 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+
+
