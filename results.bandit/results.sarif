@@ -1,0 +1,168 @@
+{
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "Bandit",
+          "rules": [
+            {
+              "id": "B605",
+              "name": "start_process_with_a_shell",
+              "helpUri": "https://bandit.readthedocs.io/en/1.8.6/plugins/b605_start_process_with_a_shell.html"
+            },
+            {
+              "id": "B310",
+              "name": "blacklist",
+              "helpUri": "https://bandit.readthedocs.io/en/1.8.6/blacklists/blacklist_calls.html#b310-urllib-urlopen"
+            },
+            {
+              "id": "B608",
+              "name": "hardcoded_sql_expressions",
+              "helpUri": "https://bandit.readthedocs.io/en/1.8.6/plugins/b608_hardcoded_sql_expressions.html"
+            }
+          ]
+        }
+      },
+      "invocations": [
+        {
+          "executionSuccessful": true,
+          "endTimeUtc": "2025-11-05T22:44:08Z"
+        }
+      ],
+      "properties": {
+        "metrics": {
+          "_totals": {
+            "loc": 39,
+            "nosec": 0,
+            "skipped_tests": 0,
+            "SEVERITY.UNDEFINED": 0,
+            "CONFIDENCE.UNDEFINED": 0,
+            "SEVERITY.LOW": 0,
+            "CONFIDENCE.LOW": 1,
+            "SEVERITY.MEDIUM": 2,
+            "CONFIDENCE.MEDIUM": 0,
+            "SEVERITY.HIGH": 1,
+            "CONFIDENCE.HIGH": 2
+          },
+          "./assignment1_code_sample.py": {
+            "loc": 39,
+            "nosec": 0,
+            "skipped_tests": 0,
+            "SEVERITY.UNDEFINED": 0,
+            "SEVERITY.LOW": 0,
+            "SEVERITY.MEDIUM": 2,
+            "SEVERITY.HIGH": 1,
+            "CONFIDENCE.UNDEFINED": 0,
+            "CONFIDENCE.LOW": 1,
+            "CONFIDENCE.MEDIUM": 0,
+            "CONFIDENCE.HIGH": 2
+          }
+        }
+      },
+      "results": [
+        {
+          "message": {
+            "text": "Starting a process with a shell, possible injection detected, security issue."
+          },
+          "level": "error",
+          "locations": [
+            {
+              "physicalLocation": {
+                "region": {
+                  "snippet": {
+                    "text": "    os.system(f'echo {body} | mail -s \"{subject}\" {to}')\n"
+                  },
+                  "startLine": 20
+                },
+                "artifactLocation": {
+                  "uri": "assignment1_code_sample.py"
+                },
+                "contextRegion": {
+                  "snippet": {
+                    "text": "    \"\"\"Send an email using the system 'mail'.\"\"\"\n    os.system(f'echo {body} | mail -s \"{subject}\" {to}')\n\n"
+                  },
+                  "endLine": 21,
+                  "startLine": 19
+                }
+              }
+            }
+          ],
+          "properties": {
+            "issue_confidence": "HIGH",
+            "issue_severity": "HIGH"
+          },
+          "ruleId": "B605",
+          "ruleIndex": 0
+        },
+        {
+          "message": {
+            "text": "Audit url open for permitted schemes. Allowing use of file:/ or custom schemes is often unexpected."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "region": {
+                  "snippet": {
+                    "text": "    data = urlopen(url).read().decode()\n"
+                  },
+                  "startLine": 25
+                },
+                "artifactLocation": {
+                  "uri": "assignment1_code_sample.py"
+                },
+                "contextRegion": {
+                  "snippet": {
+                    "text": "    url = 'http://insecure-api.com/get-data'\n    data = urlopen(url).read().decode()\n    return data\n"
+                  },
+                  "endLine": 26,
+                  "startLine": 24
+                }
+              }
+            }
+          ],
+          "properties": {
+            "issue_confidence": "HIGH",
+            "issue_severity": "MEDIUM"
+          },
+          "ruleId": "B310",
+          "ruleIndex": 1
+        },
+        {
+          "message": {
+            "text": "Possible SQL injection vector through string-based query construction."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "region": {
+                  "snippet": {
+                    "text": "    query = f\"INSERT INTO mytable (column1, column2) VALUES ('{data}', 'Another Value')\"\n"
+                  },
+                  "startLine": 30
+                },
+                "artifactLocation": {
+                  "uri": "assignment1_code_sample.py"
+                },
+                "contextRegion": {
+                  "snippet": {
+                    "text": "    \"\"\"Insert a row using parameterized SQL to avoid injection.\"\"\"\n    query = f\"INSERT INTO mytable (column1, column2) VALUES ('{data}', 'Another Value')\"\n    connection = pymysql.connect(**db_config)\n"
+                  },
+                  "endLine": 31,
+                  "startLine": 29
+                }
+              }
+            }
+          ],
+          "properties": {
+            "issue_confidence": "LOW",
+            "issue_severity": "MEDIUM"
+          },
+          "ruleId": "B608",
+          "ruleIndex": 2
+        }
+      ]
+    }
+  ],
+  "version": "2.1.0",
+  "$schema": "https://schemastore.azurewebsites.net/schemas/json/sarif-2.1.0-rtm.4.json"
+}
